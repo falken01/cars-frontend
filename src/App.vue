@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <CarsHeader />
+    <CarsHeader @openLoginForm="openLoginForm" />
+    <CarsLoginForm :dialog="loginForm" @hideLoginForm="hideLoginForm" />
     <v-main>
       <router-view />
     </v-main>
@@ -9,11 +10,20 @@
 
 <script>
 import CarsHeader from "./components/CarsHeader";
+import CarsLoginForm from "./components/CarsLoginForm";
 export default {
   name: "App",
-  components: { CarsHeader },
+  components: { CarsLoginForm, CarsHeader },
   data: () => ({
-    //
+    loginForm: false,
   }),
+  methods: {
+    openLoginForm() {
+      this.loginForm = true;
+    },
+    hideLoginForm() {
+      this.loginForm = false;
+    }
+  },
 };
 </script>

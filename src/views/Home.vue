@@ -1,14 +1,18 @@
 <template>
-  <div></div>
+  <div>
+    <CarsFilter/>
+  </div>
 </template>
 
 <script>
 
 
+import CarsFilter from "../components/CarsFilter";
 export default {
   name: "Home",
 
   components: {
+    CarsFilter
 
   },
 };
