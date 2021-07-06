@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div>
     <v-app-bar color="dark accent-4" dense dark justify-sm-space-between>

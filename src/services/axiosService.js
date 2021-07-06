@@ -13,4 +13,13 @@ export default {
   getBrands() {
     return API_CLIENT.get("/brands");
   },
+  getModels() {
+    return API_CLIENT.get("/models");
+  },
+  getCars() {
+    return API_CLIENT.get("/cars");
+  },
+  getModel(id) {
+    return API_CLIENT.get("/models/" + id)
+  }
 };

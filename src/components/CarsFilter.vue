@@ -2,7 +2,7 @@
   <div class="CarsFilter teal lighten-4 d-flex">
     <v-select class="mx-4" :items="this.items" label="Marka"></v-select>
     <v-select class="mx-4" :items="['Foo', 'Bar']" label="Model"></v-select>
-    <v-select class="mx-4" :items="['Foo', 'Bar']" label="Napasdęd"></v-select>
+    <v-select class="mx-4" :items="['Foo', 'Bar']" label="Napęd"></v-select>
     <v-select class="mx-4" :items="['Foo', 'Bar']" label="Paliwo"></v-select>
   </div>
 </template>
