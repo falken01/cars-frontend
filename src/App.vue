@@ -1,32 +1,55 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app>
+    <v-overlay v-if="isVisible">
+      <img
+        src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif"
+        height="50"
+        width="50"
+      />
+    </v-overlay>
+    <CarsHeader @openLoginForm="openLoginForm" @logout="logout" />
+    <CarsLoginForm
+      :dialog="loginForm"
+      @hideLoginForm="hideLoginForm"
+      @login="loginMethod"
+    />
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import CarsHeader from "./components/CarsHeader";
+import CarsLoginForm from "./components/CarsLoginForm";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+export default {
+  name: "App",
+  components: { CarsLoginForm, CarsHeader },
+  data: () => ({
+    loginForm: false,
+    isVisible: false,
+  }),
+  methods: {
+    loginMethod(loginPayload) {
+      this.isVisible = true;
+      this.$store
+        .dispatch("user/signIn", loginPayload)
+        .then(() => {
+          this.isVisible = false;
+        })
+        .catch((e) => console.log(e));
+    },
+    openLoginForm() {
+      this.loginForm = true;
+    },
+    hideLoginForm() {
+      this.loginForm = false;
+    },
+    logout() {
+      localStorage.removeItem("jwtToken");
+      this.$store.dispatch("user/logout_process");
+    },
+  },
+};
+</script>
