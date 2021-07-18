@@ -8,12 +8,17 @@
         <v-container>
           <v-row>
             <v-col cols="12">
-              <v-text-field label="E-mail" required></v-text-field>
+              <v-text-field
+                label="E-mail"
+                v-model="email"
+                required
+              ></v-text-field>
             </v-col>
             <v-col cols="12">
               <v-text-field
                 label="Hasło"
                 type="password"
+                v-model="password"
                 required
               ></v-text-field>
             </v-col>
@@ -25,7 +30,7 @@
         <v-btn color="blue darken-1" text @click="$emit('hideLoginForm')">
           Zamknij
         </v-btn>
-        <v-btn color="blue darken-1" text @click="$emit('hideLoginForm')">
+        <v-btn color="blue darken-1" text @click="$emit('hideLoginForm')" v-on:click="$emit('login',collectData)">
           Zaloguj
         </v-btn>
       </v-card-actions>
@@ -37,7 +42,18 @@
 export default {
   name: "CarsLoginForm",
   props: ["dialog"],
-  data: () => ({}),
+  data: () => ({
+    email: "",
+    password: "",
+  }),
+  computed: {
+    collectData() {
+      return {
+        email: this.email,
+        password: this.password
+      };
+    },
+  },
 };
 </script>
 

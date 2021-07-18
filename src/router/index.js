@@ -11,6 +11,12 @@ const routes = [
     component: Home,
   },
   {
+    path: "/register",
+    name: "Register",
+    component: () =>
+      import(/* webpackChunkName: "register" */ "../views/Register.vue"),
+  },
+  {
     path: "/about",
     name: "About",
     // route level code-splitting
@@ -22,6 +28,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
+  mode: "history",
   routes,
 });
 

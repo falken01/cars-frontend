@@ -1,30 +1,41 @@
 <template>
-  <div class="CarsFilter teal lighten-4 d-flex">
-    <v-select class="mx-4" :items="this.items" label="Marka"></v-select>
-    <v-select class="mx-4" :items="['Foo', 'Bar']" label="Model"></v-select>
-    <v-select class="mx-4" :items="['Foo', 'Bar']" label="Napęd"></v-select>
-    <v-select class="mx-4" :items="['Foo', 'Bar']" label="Paliwo"></v-select>
+  <div class="CarsFilter teal lighten-4 d-flex flex-xl-wrap">
+    <v-select
+      class="mx-4 filters"
+      :items="brandNames"
+      label="Marka"
+      :disabled="isDisabled"
+    ></v-select>
+    <v-select
+      class="mx-4 filters"
+      :items="colors"
+      label="Kolor"
+      :disabled="isDisabled"
+    ></v-select>
+    <v-select
+      class="mx-4 filters"
+      :items="carDrives"
+      label="Napęd"
+      :disabled="isDisabled"
+    ></v-select>
+    <v-select
+      class="mx-4 filters"
+      :items="fuelNames"
+      label="Paliwo"
+      :disabled="isDisabled"
+    ></v-select>
+    <v-btn color="primary"> Szukaj </v-btn>
   </div>
 </template>
 
 <script>
-import axiosService from "../services/axiosService";
 export default {
   name: "CarsFilter",
+  props: ["brandNames", "fuelNames", "carDrives", "colors"],
   data() {
     return {
-      items: [],
+      isDisabled: false,
     };
-  },
-  created() {
-    axiosService
-      .getBrands()
-      .then((p) => {
-        console.log(p);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   },
 };
 </script>
@@ -32,5 +43,8 @@ export default {
 <style scoped>
 .CarsFilter {
   padding: 60px 120px;
+}
+.filters {
+  width: 22%;
 }
 </style>
